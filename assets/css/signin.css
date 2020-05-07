@@ -1,0 +1,68 @@
+/* Import fonts from google font */
+
+@import url('https://fonts.googleapis.com/css?family=Lobster|Montserrat&display=swap');
+html,
+body {
+    height: 100%;
+    overflow: hidden;
+    background: #ffe259;
+    background-image: url('../img/bground.jpeg');
+    background-size: cover;
+}
+
+body:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: linear-gradient(to right, rgba(71, 166, 111, 1), rgba(90, 207, 128, 1), rgba(147, 236, 179, 1));
+    opacity: .4;
+}
+
+
+/* Variables */
+
+
+/* background: rgb(71,166,111); */
+
+:root {
+    --primary-gradient: linear-gradient(to right, #4e4376, #2b5876);
+    --mango-gradient: linear-gradient(90deg, rgba(71, 166, 111, 1) 0%, rgba(90, 207, 128, 1) 42%, rgba(147, 236, 179, 1) 100%), url('../img/bground.jpeg');
+    --text-color: #F7F9F9;
+    --Montserrat: "Montserrat", cursive;
+    --Lobster: "Lobster", cursive;
+    --primary-shadow: 3px 4px 7px rgba(27, 27, 27, 0.534);
+    --border-color: rgba(0, 0, 0, 0.329);
+}
+
+.caption {
+    text-align: center;
+    padding: 0 2rem;
+    color: grey;
+    font-family: var(--Lobster);
+    font-size: medium;
+}
+
+.login-form {
+    padding: 0.2em 1.5em 1.5em 1.5em;
+}
+
+.login-btn {
+    margin-top: 1em;
+    background-color: #5ACF80;
+    border: none;
+}
+
+.login-btn:hover {
+    background-color: rgb(93, 155, 112);
+}
+
+.logo {
+    margin-top: 0.5em;
+    text-align: center;
+    font-family: 'Luckiest Guy', "Helvetica Neue", Arial;
+    font-size: 1.5em;
+    color: grey;
+}

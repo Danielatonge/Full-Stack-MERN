@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('partials/page/head') %>
+</head>
+
+<body>
+    <%- include('partials/page/header') %>
+        <div class="wrapper">
+            <%- include('partials/page/sidebar') %>
+                <div class="main-panel">
+
+                    <%- include('partials/page/navigation') %>
+
+                        <div id="tracking" class="content">
+                            <!-- To be rendered by react -->
+                        </div>
+                        <%- include('partials/page/footer') %>
+                </div>
+        </div>
+</body>
+<%- include('partials/page/jsdefaults') %>
+
+</html>
