@@ -1,46 +1,14 @@
 import React, { Component } from 'react';
-import StudyProgram from './studyProgram';
-import GroupNumber from './groupNumber';
 import Axios from 'axios';
 
-import programs from '../programs.json';
 
 class TrackAForm extends Component {
     state = { 
-        program: "BS - Year 1",
-        groups: programs["BS - Year 1"],
-        group: "B19-01",
-        day: "Monday",
         slot: "1",
         roomNum: "101",
-        date: "2020-05-04"
+        date: "2020-04-20"
      }
     
-    handleProgram = (event) => {
-        const program = event.target.value;
-        this.setState({
-            ...this.state,
-            program,
-            groups: programs[program]
-        });
-    }
-
-    handleGroup = (event) => {
-        const group = event.target.value;
-        this.setState({
-            ...this.state,
-            group
-        });
-    }
-
-    handleDay = (event) => {
-        const day = event.target.value;
-        this.setState({
-            ...this.state,
-            day
-        });
-    }
-
     handleSlot = (event) => {
         const slot = event.target.value;
         this.setState({
@@ -67,13 +35,15 @@ class TrackAForm extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        const {program, group, day, slot, roomNum, date } = this.state;
-
-        Axios.get(`/api/attendancetracking/?program=${program}&group=${group}&day=${day}&slot=${slot}&roomNumber=${roomNum}&date=${date}`)
+        const slotarray = ["09:00", "10:35", "12:10", "14:10", "15:45", "17:20", "18:55"];
+        const {slot, roomNum, date } = this.state;
+        const time = slotarray[parseInt(slot)-1];
+        const datetime = `${date}T${time}:00.000Z`;
+        Axios.get(`/api/attendancetracking/?roomNumber=${roomNum}&datetime=${datetime}`)
         .then((response) => {
+            console.log(response.data.students);
             const {students, subject, code } = response.data;
             this.props.submitted(subject, students, code);
-            
         })
         .catch((error) => {
             console.log(error);
@@ -84,32 +54,7 @@ class TrackAForm extends Component {
         return ( 
             <form onSubmit={this.handleSubmit}>
                 <div className="row">
-                    <div className="col-md-2">
-                        <div className="form-group">
-                            <label>Study Program</label>
-                            <StudyProgram onProgramChange={this.handleProgram} program={this.state.program} />
-                        </div>
-                    </div>
-                    <div className="col-md-1">
-                        <div className="form-group">
-                            <label>Group #</label>
-                            <GroupNumber groups={this.state.groups} onGroupChange={this.handleGroup} />
-                        </div>
-                    </div>
-                    <div className="col-md-2">
-                        <div className="form-group">
-                            <label htmlFor="exampleInputEmail1">Day</label>
-                            <select className="form-control" name="day" value={this.state.day} onChange={this.handleDay} >
-                                <option>Monday</option>
-                                <option>Tuesday</option>
-                                <option>Wednesday</option>
-                                <option>Thursday</option>
-                                <option>Friday</option>
-                                <option>Saturday</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div className="col-md-3">
+                    <div className="col-md-4">
                         <div className="form-group">
                             <label htmlFor="exampleInputEmail1">Time slot</label>
                             <select className="form-control" name="slot" value={this.state.slot} onChange={this.handleSlot} >
@@ -123,13 +68,13 @@ class TrackAForm extends Component {
                             </select>
                         </div>
                     </div>
-                    <div className="col-md-1">
+                    <div className="col-md-4">
                         <div className="form-group">
                             <label>Room #</label>
                             <input className="form-control" name="room" type="text" value={this.state.roomNum} onChange={this.handleRoom} />
                         </div>
                     </div>
-                    <div className="col-md-3">
+                    <div className="col-md-4">
                         <div className="form-group">
                             <label>Date</label>
                             <input className="form-control" id="e" name="date" type="date" value={this.state.date} onChange={this.handleDate} />
@@ -137,6 +82,7 @@ class TrackAForm extends Component {
                     </div>
                 </div>
                 <button type="submit" className="btn btn-info btn-fill pull-right">Retrieve</button>
+                
                 <div className="clearfix"></div>
             </form> 
         );

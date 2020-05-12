@@ -39,7 +39,6 @@ server.get("/attendancetracking", (req, res) => {
 });
 
 server.get("/logout", (req, res) => {
-    app.locals = {}
     res.redirect("login");
 });
 
@@ -48,6 +47,14 @@ server.get('/', (req, res) => {
         title: "Login: Attendance Tracking"
     });
 });
+
+server.post('/login', (req, res) => {
+    res.redirect("/attendancetracking");
+})
+
+server.post('*', (req, res) => {
+    res.render("404");
+})
 
 server.listen(config.port, config.host, () => {
     console.info("Express listening on port ", config.port); 

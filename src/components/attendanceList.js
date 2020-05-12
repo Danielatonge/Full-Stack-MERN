@@ -1,9 +1,10 @@
 import React from 'react';
 
 const getStudents = (students, status) => {
-    const tableData = students.map( ({studentid, name, email, is_verified}) => (
-                                    <tr key={studentid} >
-                                        <td key={studentid}>{studentid}</td>
+    let count = 1;
+    const tableData = students.map( ({name, email, is_verified}) => (
+                                    <tr key={count} >
+                                        <td key={count}>{count++}</td>
                                         <td key={name}>{name}</td>
                                         <td key={email}>{email}</td>
                                         <td key={is_verified}>{is_verified}</td>

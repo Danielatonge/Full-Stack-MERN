@@ -23,7 +23,7 @@ class AttendanceTrack extends Component {
         return ( 
             <div className="container-fluid">
                 <div className="row">
-                    <div className="col-md-11">
+                    <div className="col-md-6">
                         <div className="card" id="card_id" style={style}>
                             <div className="header">
                                 <h4 className="title">Retrieve Attendance List</h4>
